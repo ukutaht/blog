@@ -10,3 +10,5 @@ twitter_username: jekyllrb
 github_username:  jekyll
 
 markdown: redcarpet
+
+permalink: none
