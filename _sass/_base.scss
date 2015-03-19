@@ -17,12 +17,12 @@ body {
     font-family: $base-font-family;
     font-size: $base-font-size;
     line-height: $base-line-height;
-    font-weight: 300;
+    font-weight: 400;
     color: $text-color;
     background-color: $background-color;
     -webkit-text-size-adjust: 100%;
+    letter-spacing: 0.02em;
 }
-
 
 
 /**
@@ -33,6 +33,10 @@ p, blockquote, pre,
 ul, ol, dl, figure,
 %vertical-rhythm {
     margin-bottom: $spacing-unit / 2;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $title-color;
 }
 
 
@@ -80,7 +84,7 @@ li {
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 300;
+    font-weight: 400;
 }
 
 
@@ -89,16 +93,11 @@ h1, h2, h3, h4, h5, h6 {
  * Links
  */
 a {
-    color: $brand-color;
+    color: $blue;
     text-decoration: none;
 
-    &:visited {
-        color: darken($brand-color, 15%);
-    }
-
     &:hover {
-        color: $text-color;
-        text-decoration: underline;
+        color: darken($blue, 20%);
     }
 }
 
