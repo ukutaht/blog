@@ -4,7 +4,7 @@
 .site-header {
     border-top: 5px solid $grey-color-dark;
     border-bottom: 1px solid $grey-color-light;
-    min-height: 56px;
+    min-height: 75px;
 
     // Positioning context for the mobile navigation icon
     position: relative;
@@ -12,17 +12,35 @@
 
 .site-title {
     font-size: $base-font-size * 2;
-    line-height: 56px;
+    line-height: 75px;
     letter-spacing: -1px;
     margin-bottom: 0;
     float: left;
     color: $title-color;
+    margin-right: 40px;
+}
+
+.main-nav {
+  display: inline;
+  margin-left: 0px;
+
+  li {
+    display:inline;
+    padding-right: 10px;
+  }
+
+  .social-icon {
+    font-size: 35px;
+    color: $title-color;
+    position: relative;
+    top: 8px;
+  }
 }
 
 .rss-button {
   float: right;
-  margin-top: 10px;
-  font-size: 27px;
+  margin-top: 8px;
+  font-size: 35px;
   color: $title-color;
 }
 
@@ -35,67 +53,11 @@
     padding: $spacing-unit 0;
 }
 
-.footer-heading {
-    font-size: 18px;
-    margin-bottom: $spacing-unit / 2;
+.description {
+  font-size: $small-font-size;
+  color: $grey-color;
+  text-align: center;
 }
-
-.contact-list,
-.social-media-list {
-    list-style: none;
-    margin-left: 0;
-}
-
-.footer-col-wrapper {
-    font-size: 15px;
-    color: $grey-color;
-    margin-left: -$spacing-unit / 2;
-    @extend %clearfix;
-}
-
-.footer-col {
-    float: left;
-    margin-bottom: $spacing-unit / 2;
-    padding-left: $spacing-unit / 2;
-}
-
-.footer-col-1 {
-    width: -webkit-calc(35% - (#{$spacing-unit} / 2));
-    width:         calc(35% - (#{$spacing-unit} / 2));
-}
-
-.footer-col-2 {
-    width: -webkit-calc(20% - (#{$spacing-unit} / 2));
-    width:         calc(20% - (#{$spacing-unit} / 2));
-}
-
-.footer-col-3 {
-    width: -webkit-calc(45% - (#{$spacing-unit} / 2));
-    width:         calc(45% - (#{$spacing-unit} / 2));
-}
-
-@include media-query($on-laptop) {
-    .footer-col-1,
-    .footer-col-2 {
-        width: -webkit-calc(50% - (#{$spacing-unit} / 2));
-        width:         calc(50% - (#{$spacing-unit} / 2));
-    }
-
-    .footer-col-3 {
-        width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-        width:         calc(100% - (#{$spacing-unit} / 2));
-    }
-}
-
-@include media-query($on-palm) {
-    .footer-col {
-        float: none;
-        width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-        width:         calc(100% - (#{$spacing-unit} / 2));
-    }
-}
-
-
 
 /**
  * Page content
