@@ -126,8 +126,7 @@ blockquote {
  */
 pre,
 code {
-    font-size: 16px;
-    border-radius: 3px;
+    font-size: 19px;
     margin-top: 2em;
     margin-bottom: 2em;
     line-height: 1.4em;
@@ -144,6 +143,7 @@ pre {
     background: #ffffff;
 
     > code {
+        font-size: 16px;
         border: 0;
         padding-right: 0;
         padding-left: 0;
