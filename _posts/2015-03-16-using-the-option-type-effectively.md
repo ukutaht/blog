@@ -43,8 +43,9 @@ fn show_shortest(names: Vec<&str>) -> String {
 }
 ```
 
-This behaves exactly like our first pattern-matching solution, returning `"Not Found"` if the list
-is empty. I find this version easier to read and understand quickly since we don't have to
+This function behaves exactly like our first pattern-matching solution, 
+returning the shortest string or `"Not Found"` if the list is empty. 
+I find this version easier to read and understand quickly since we don't have to
 mentally parse a pattern matching expression.
 
 ### Map
@@ -52,7 +53,7 @@ mentally parse a pattern matching expression.
 We want to get the length of the shortest name. Now, what happens if the shortest name itself is `None`? 
 Failing to come up with a meaningful integer representation for a missing length, we decide that `get_shortest_length` should return an optional as well.
 
-We jump right into the imlementation and use pattern matching again to achieve this result
+We jump right into the implementation and use pattern matching again to achieve this result
 
 ```rust
 fn get_shorest_length(names: Vec<&str>) -> Option<usize> {
@@ -89,7 +90,24 @@ would be completely right. Rust's `map` behaves like Haskell's `fmap`.
 
 ### And Then
 
-Suppose that we want to chain some operations, each of which could return a `None`. Blah
+Suppose that we want to chain some operations, each of which could return a `None`.
+Having just learned about `map`, we go ahead and try to use it for this problem as well
+
+```rust
+fn get_shorest(names: Vec<&str>) -> Option<> {
+  get_shortest(names)
+    .map(|shortest| db.find_by_name(shortest))
+    //more
+}
+```
+
+We run this but the compiler gives us an error: `some error`. The compiler is actually right,
+mapping is not the appropriate operation in this case. Since `map` wraps its return value
+in an Optional, combining it with a function that returns an Optional itself results in
+doubly wrapped value. For example, you may get back a `Some(None)` which is not pleasant
+to work with.
+
+So mapping doesn't work for us. Let's just write out what we want to do and refactor later.
 
 ```rust
 fn get_shorest(names: Vec<&str>) -> Option<> {
