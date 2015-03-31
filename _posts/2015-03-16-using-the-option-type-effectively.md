@@ -17,7 +17,7 @@ let empty = Vec::new();
 get_shortest(empty) //=> None
 ```
 
-Now we want to use this functin to show the shortest name to the user. If the list
+Now we want to use this function to show the shortest name to the user. If the list
 is empty we should just show `"Not found"`. How might we implement this?
 
 It is very common to see pattern matching in this context
@@ -79,11 +79,11 @@ fn get_shorest_length(names: Vec<&str>) -> Option<usize> {
 
 As you can see, mapping over an optional looks a lot like mapping over a collection.
 The difference is in how the lamdba expression is handled: for collections it is 
-called once for each element, for optionals it is only called if the value exists.
+called once for each element, for optionals it is only called only if the value exists.
 
 You may also notice that we don't have to manually wrap the return value of `shortest.len()` in
 an Optional. The mapping operation returns `Some` if the value was there to begin with, and `None`
-if we started out with a `None`.
+if we started out with a `None`, exactly as the pattern matching solution.
 
 Readers coming from a functional language might be thinking that this is just a functor, and they 
 would be completely right. Rust's `map` behaves like Haskell's `fmap`.
@@ -126,7 +126,7 @@ fn get_shorest(names: Vec<&str>) -> Option<> {
 ```
 
 This seems to work but there's one problem with it: nobody wants to write code like this.
-There's a clear pattern to the way we check for presence every step of the way so
+There's a clear pattern in the way we check for presence every step of the way so
 abstracting this chain should be trivial. Luckily, Rust has a built in method called
 `and_then` which can help us out.
 
@@ -139,6 +139,6 @@ fn get_shorest(names: Vec<&str>) -> Option<> {
 ```
 
 `and_then` works similarly to `map` but it does not wrap the return value in an optional automatically.
-It allows the lamdba to choose the return type which means that we can chain operations which each may fail.
+It lets the lamdba to choose the return type which allows us to chain operations which each may fail.
 
 People with a background in functional programming may recognise that this is a monad.
