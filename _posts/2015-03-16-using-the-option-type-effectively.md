@@ -5,9 +5,16 @@ date:  2015-03-16 10:05:00
 ---
 
 Lately we've seen the `Option` type get more and more attention in the community.
-Adopted from functional languages, it can help us avoid null values and write safer code.
+Adopted from functional languages, it can help us avoid `null` values and write safer code.
 
-Suppose that we already have a function to find the shortest string from a list. It returns an `Option` like this:
+Suppose that we already have a function to find the shortest string from a list.
+Its signature looks like this in [Rust](www.rust-lang.org):
+
+```rust
+  fn get_shortest(names: Vec<Stirng>) -> Option<String>
+```
+
+We see that the return type is an `Option<String>`. The reason for this is that given an empty list, this function would return a `None` value:
 
 ```rust
 let names = vec!["Uku", "Felipe"];
@@ -35,7 +42,7 @@ show_shortest(vec!["Uku", "Felipe"]) //=> "Uku"
 show_shortest(Vec::new()) //=> "Not Found"
 ```
 
-There's nothing wrong with this code but there's a much easier way to grab the boxed value of an `Option` with a default
+There's nothing wrong with this code but there's a much easier way to grab the boxed value of an `Option` or returning a default
 
 ```rust
 fn show_shortest(names: Vec<&str>) -> String {
@@ -43,15 +50,15 @@ fn show_shortest(names: Vec<&str>) -> String {
 }
 ```
 
-This function behaves exactly like our first pattern-matching solution, 
-returning the shortest string or `"Not Found"` if the list is empty. 
-I find this version easier to read and understand quickly since we don't have to
-mentally parse a pattern matching expression.
+This behaves exactly like our first pattern-matching solution, returning the shortest string or `"Not Found"` if the list
+is empty. I find this version easier to read and understand quickly since we don't have to interpret as many
+elements of syntax (`match`, `=>` and `_`).
+The result of the operation is evident in the name of the function: either unwrap the innver value of `Some` or use `"Not Found"` instead.
 
 ### Map
 
-We want to get the length of the shortest name. Now, what happens if the shortest name itself is `None`? 
-Failing to come up with a meaningful integer representation for a missing length, we decide that `get_shortest_length` should return an optional as well.
+We want to get the length of the shortest name. Now, what happens if the shortest name itself is `None`? -1? 0?
+Failing to come up with a meaningful integer representation for a missing length, we decide that `get_shortest_length` should return an `Optional` as well.
 
 We jump right into the implementation and use pattern matching again to achieve this result
 
@@ -69,7 +76,7 @@ get_shortest_length(Vec::new()); //=> None
 ```
 
 Again, this works but we force readers to untangle the pattern matching expression in their
-heads. Rust provides a function `map` which we can make use of instead
+heads. Rust provides a function `map` which we can make use of instead.
 
 ```rust
 fn get_shorest_length(names: Vec<&str>) -> Option<usize> {
@@ -82,10 +89,10 @@ The difference is in how the lamdba expression is handled: for collections it is
 called once for each element, for optionals it is only called only if the value exists.
 
 You may also notice that we don't have to manually wrap the return value of `shortest.len()` in
-an Optional. The mapping operation returns `Some` if the value was there to begin with, and `None`
-if we started out with a `None`, exactly as the pattern matching solution.
+an `Optional`. The mapping operation returns the new value wrapped in `Some` if the value was there
+to begin with, and `None` if we started out with a `None`, exactly as the pattern matching solution.
 
-Readers coming from a functional language might be thinking that this is just a functor, and they 
+Readers coming from a functional language might be thinking that this is just a functor, and they
 would be completely right. Rust's `map` behaves like Haskell's `fmap`.
 
 ### And Then
