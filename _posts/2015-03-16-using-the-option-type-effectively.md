@@ -53,14 +53,15 @@ fn show_shortest(names: Vec<&str>) -> String {
 This behaves exactly like our first pattern-matching solution, returning the shortest string or `"Not Found"` if the list
 is empty. I find this version easier to read and understand quickly since we don't have to interpret as many
 elements of syntax (`match`, `=>` and `_`).
-The result of the operation is evident in the name of the function: either unwrap the innver value of `Some` or use `"Not Found"` instead.
+The result of the operation is also evident in the name of the function: either unwrap the inner value of `Some` or use `"Not Found"` instead.
 
 ### Map
 
-We want to get the length of the shortest name. Now, what happens if the shortest name itself is `None`? -1? 0?
+Now suppose we want to get the length of the shortest name of the list.
+Now, what happens if the shortest name itself is `None`? -1? 0?
 Failing to come up with a meaningful integer representation for a missing length, we decide that `get_shortest_length` should return an `Optional` as well.
 
-We jump right into the implementation and use pattern matching again to achieve this result
+We jump right into the implementation and again start out with pattern matching to achieve this result
 
 ```rust
 fn get_shorest_length(names: Vec<&str>) -> Option<usize> {
@@ -76,8 +77,11 @@ get_shortest_length(Vec::new()); //=> None
 ```
 
 Again, this works but we force readers to untangle the pattern matching expression in their
-heads. Rust provides a function `map` which we can make use of instead.
-
+heads.
+Have a closer look at the pairing of possible inputs on the left of `=>` and outputs on the right of it.
+Notice that the container does not change? `None` maps to `None` and `Some` to `Some`.
+That seems to be enough of a pattern to extract it into a separate function.
+Rust provides exactly such a `map` function which we can make use of instead:
 ```rust
 fn get_shorest_length(names: Vec<&str>) -> Option<usize> {
   get_shortest(names).map(|shortest| shortest.len())
