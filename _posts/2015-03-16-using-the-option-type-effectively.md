@@ -15,7 +15,7 @@ Suppose that we already have a function to find the shortest string from a list.
 Its signature looks like this in [Rust](www.rust-lang.org):
 
 ```rust
-  fn get_shortest(names: Vec<String>) -> Option<String>
+fn get_shortest(names: Vec<String>) -> Option<String>
 ```
 
 We see that the return type is an `Option<String>`. The reason for that is that the shortest element of an
