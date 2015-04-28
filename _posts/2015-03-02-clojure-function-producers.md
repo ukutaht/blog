@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Clojure Function Producers"
-date: 2015-03-02 14:25:27
 ---
 Clojure is a language that emphasises simplicity and composability. The simplest and easiest unit of behaviour to compose is a function.
 

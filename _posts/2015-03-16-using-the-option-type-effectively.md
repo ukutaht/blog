@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Using The Option Type Effectively"
-date:  2015-03-16 10:05:00
 ---
 
 Lately we've seen the `Option` type get more and more attention in the community.
