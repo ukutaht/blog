@@ -126,10 +126,10 @@ blockquote {
  */
 pre,
 code {
-    font-size: 19px;
+    font-size: $base-font-size * 1.1;
     margin-top: 2em;
     margin-bottom: 2em;
-    line-height: 1.4em;
+    line-height: 1em;
 }
 
 code {
@@ -143,10 +143,13 @@ pre {
     background: #ffffff;
 
     > code {
-        font-size: 16px;
+        font-size: $small-font-size;
         border: 0;
         padding-right: 0;
         padding-left: 0;
+        @include media-query($on-palm) {
+          font-size: $small-font-size * 0.9;
+        }
     }
 }
 
