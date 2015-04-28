@@ -1,0 +1,54 @@
+#! /bin/sh
+
+set -e
+
+read_credential() {
+  echo `cat .credentials | ruby -ryaml -e "credentials = YAML.load(STDIN.read); puts credentials['$1']"`
+}
+
+get_content_type() {
+  raw_type=`file --mime-type -b $1`
+  if [ "$raw_type" == "text/x-c" ]; then
+    echo "text/css"
+  else
+    echo $raw_type
+  fi
+}
+
+calculate_hash() {
+  echo `openssl md5 -binary < "$1" | base64`
+}
+
+current_date() {
+  echo `LC_ALL=C date -u +"%a, %d %b %Y %X %z"`
+}
+
+upload() { 
+  local original_filename=$1
+  local stripped_filename=`echo $1 | sed 's,^[^/]*/,,'`
+  local md5=`calculate_hash $original_filename`
+  local content_type=`get_content_type $original_filename`
+  local date=`current_date`
+  local signature=`printf "PUT\n$md5\n$content_type\n$date\n/$bucket/$stripped_filename" | openssl sha1 -binary -hmac "$secret_key" | base64`
+
+  echo "Uploading file $original_filename -> $bucket/$stripped_filename"
+
+  curl -T $original_filename http://$bucket.s3.amazonaws.com/$stripped_filename \
+      -H "Date: $date" \
+      -H "Authorization: AWS $access_key:$signature" \
+      -H "Content-Type: $content_type" \
+      -H "Content-MD5: $md5"
+}
+
+echo "Building site"
+jekyll build
+
+echo;echo;echo 
+
+access_key=`read_credential "access_key"`
+secret_key=`read_credential "secret_key"`
+bucket=`read_credential "bucket"`
+
+for f in `find _site -type f`; do 
+  upload $f
+done
