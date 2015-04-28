@@ -108,6 +108,6 @@ We can easily combine `comp` with `partial`, too
 
 I would argue that this way of counting even numbers is more idiomatic. The idea of composability is a core concept of functional programming. By combining simple functions, arbitrarily complex behaviour can emerge.
 
-### Conclusion
+### Use them
 
 `partial` and `comp` are beautiful higher-order functions that are at the core of functional philosophy. To write more elegant and expressive code, we must learn how to recognise opportunities to use them and know how to apply them effectively.
