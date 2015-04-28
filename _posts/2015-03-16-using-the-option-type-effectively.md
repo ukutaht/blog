@@ -29,7 +29,7 @@ let empty = Vec::new();
 get_shortest(empty) //=> None
 ```
 
-Now we want to use this function to show the shortest name to the user. If the list
+We can build on this function and use it to show the shortest name to the user. If the list
 is empty we should just show `"Not found"`. How might we implement this?
 
 It is very common to use pattern matching to get the job done:
