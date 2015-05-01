@@ -11,7 +11,7 @@ To demonstrate how we can leverage the `Option` type, I will be using [Rust](htt
 or any language that has a similar API for optional values.
 
 Suppose that we already have a function to find the shortest string from a list.
-Its signature looks like this in [Rust](www.rust-lang.org):
+Its signature looks like this in Rust:
 
 ```rust
 fn get_shortest(names: Vec<String>) -> Option<String>
