@@ -33,7 +33,7 @@ upload() {
 
   echo "Uploading file $original_filename -> $bucket/$stripped_filename"
 
-  curl -T $original_filename http://$bucket.s3.amazonaws.com/$stripped_filename \
+  curl -T $original_filename ukutaht.com.s3-eu-west-1.amazonaws.com/$stripped_filename \
       -H "Date: $date" \
       -H "Authorization: AWS $access_key:$signature" \
       -H "Content-Type: $content_type" \
