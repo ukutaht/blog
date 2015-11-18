@@ -64,14 +64,14 @@ The result of the operation is also evident in the name of the function: either 
 
 ### Map
 
-At first it is natural to unwrap the value of an `Option` as quickly as possible. 
+At first it is natural to unwrap the value of an `Option` as quickly as possible.
 Getting burned by the infamous `NullPointerException` has created a culture of avoiding nulls, but
 the `Option` type is different. As opposed to `null`, optional values are part of the type system.
 Hence they can safely be passed around and operated on like any other first-class value.
 
 For example, say our users wanted a function to find out the length of the shortest name in a list.
-Given that we already have `get_shortest`, it should be a matter of just calling length 
-on its result. However, we know that `get_shortest` returns an optional value, so what is the 
+Given that we already have `get_shortest`, it should be a matter of just calling length
+on its result. However, we know that `get_shortest` returns an optional value, so what is the
 length of `None`?  Without support for optional values, we might come up with a special constant
 or throw an exception to handle this case, but luckily we don't have to. If optional values are
 supported, we can just say that the length of `None` is `None`.
@@ -134,7 +134,7 @@ fn get_user_with_shortest_name(names: Vec<&str>) -> Option<User> {
 }
 ```
 
-Running this through the compiler gives us an error: 
+Running this through the compiler gives us an error:
 
 ```
 <anon>:18:37: 18:41 error: mismatched types:
@@ -190,7 +190,7 @@ get_user_with_shortest_name(names) //=> Some(User { name: "Uku" })
 ```
 
 `and_then` works similarly to `map` but it makes less assumptions about the function passed into it.
-Instead of wrapping the return value in an `Option` automatically, 
+Instead of wrapping the return value in an `Option` automatically,
 it lets the function choose the return type. This grants us with the power to create a chain
 of operations where any link can possibly fail.
 

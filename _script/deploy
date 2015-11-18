@@ -23,7 +23,7 @@ current_date() {
   echo `LC_ALL=C date -u +"%a, %d %b %Y %X %z"`
 }
 
-upload() { 
+upload() {
   local original_filename=$1
   local stripped_filename=`echo $1 | sed 's,^[^/]*/,,'`
   local md5=`calculate_hash $original_filename`
@@ -43,12 +43,12 @@ upload() {
 echo "Building site"
 jekyll build
 
-echo;echo;echo 
+echo;echo;echo
 
 access_key=`read_credential "access_key"`
 secret_key=`read_credential "secret_key"`
 bucket=`read_credential "bucket"`
 
-for f in `find _site -type f`; do 
+for f in `find _site -type f`; do
   upload $f
 done
