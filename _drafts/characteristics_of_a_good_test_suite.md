@@ -14,19 +14,26 @@ With that in mind, let us discuss what a good test suite might look like.
 
 #### 1. Covers the production code
 
-Have you ever seen a green test run knowing that the production code is
-in fact broken? When the tests are green in a bad state, there is no way
-of telling whether you've broken something or not.
+Have you ever seen a green test knowing that the code it's testing is
+in fact broken? If that's the case, how can we trust the test suite
+to tell us when we've broken the code?
 
-Notice that coverage is not only about which lines are hit by tests, but also which assertions are made.
+It is absolutely essential that the test suite enforces correctess across
+the whole production code. When I break something, a test must fail.
+The confidence provided by such a test suite is what allows us to move
+fast without introducing regressions.
+
+Importantly, coverage is not only about which lines are hit by tests, but also which assertions are made.
 It is entirely possible to score 100% line coverage with a test suite that makes no assertions at all.
 This is why test coverage tools can never tell the full story about the quality of your tests.
+With the tools at hand today, the team still has to review the tests and decide whether
+they have good coverage.
 
 A good heuristic for coverage is to comment out random lines of source code
-and run the tests. If you can disable a line without breaking the tests,
+and run the tests. If you can disable a significant line without breaking the tests,
 it means that the line is not covered. Sometimes I'll make a subtle change to the line
 instead of commenting it out: replace `array.select` with `array.reject`,
-change magic strings and numbers, hardcode the return value of a collaborator, etc.
+change magic strings and numbers, hardcode the return value of a function, etc.
 Repeat this a few times, and you'll be able to tell
 whether the test suite is trustworthy or not.
 
@@ -61,8 +68,21 @@ are not useful at all for providing feedback. It is important to always look bac
 move, refactor, and maybe even delete the tests that are used to drive out the implementation.
 The tests that you check in should be the tests that are going to provide value going forward.
 
-
 Good tests do not just tell you _that_ something is wrong, they also point you
 to _what_ is wrong. They provide feedback at the right level.
 
 #### 4. Runs fast
+
+If we compare two test suites, one that runs in 60 seconds and another that runs in 6 seconds,
+which one do you recon is run more often?
+
+Few people are going to sit and wait for a minute to let the tests finish. They'll
+continue writing code or worse, check email/twitter while the tests are running.
+Maintaining context and focus is important for productivity
+which is why the test suite must be quick.
+
+Last week I spent a day profiling and optimising the test suite for my current project.
+Some might argue that it was a waste of time because I didn't ship any features for
+our users. On the other hand, the tests now run 60% faster as a result and the team
+loves the improved development experience. Over time, I'm convinced that the productivity we
+gain will add up to more than the day I spent on optimising.
