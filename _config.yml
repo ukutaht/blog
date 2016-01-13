@@ -4,7 +4,7 @@ description: Uku Taht's development blog
 baseurl: ""
 url: "http://yourdomain.com"
 twitter_username: ukutaht
-github_username:  heruku
+github_username:  ukutaht
 
 markdown: redcarpet
 
