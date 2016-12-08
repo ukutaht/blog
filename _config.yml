@@ -6,6 +6,7 @@ url: "http://yourdomain.com"
 twitter_username: ukutaht
 github_username:  ukutaht
 
-markdown: redcarpet
+kramdown:
+  input: GFM
 
 permalink: none

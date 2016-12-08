@@ -58,5 +58,5 @@ fields we're calculating in this SQL query used?
 
 #### Configuration
 #### Data
-#### Abstractions
+#### Indirections
 #### Optimisations

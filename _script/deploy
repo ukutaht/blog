@@ -8,7 +8,8 @@ read_credential() {
 
 get_content_type() {
   raw_type=`file --mime-type -b $1`
-  if [ "$raw_type" == "text/x-c" ]; then
+
+  if [[ $1 == *css ]]; then
     echo "text/css"
   else
     echo $raw_type
@@ -31,9 +32,9 @@ upload() {
   local date=`current_date`
   local signature=`printf "PUT\n$md5\n$content_type\n$date\n/$bucket/$stripped_filename" | openssl sha1 -binary -hmac "$secret_key" | base64`
 
-  echo "Uploading file $original_filename -> $bucket/$stripped_filename"
+  echo "Uploading file $original_filename -> $bucket/$stripped_filename with content type $content_type"
 
-  curl -T $original_filename ukutaht.com.s3-eu-west-1.amazonaws.com/$stripped_filename \
+  curl -T $original_filename www.ukutaht.com.s3-eu-west-1.amazonaws.com/$stripped_filename \
       -H "Date: $date" \
       -H "Authorization: AWS $access_key:$signature" \
       -H "Content-Type: $content_type" \
