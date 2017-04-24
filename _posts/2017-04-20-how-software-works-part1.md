@@ -3,7 +3,7 @@ layout: post
 title: "How software works part Ⅰ"
 ---
 
-My journey in software started with Javascript and Ruby, learning how to create delightful experiences for regular users. Although I was able to write software at the application level I had no understanding of how software _actually works_.
+My journey in software started with Javascript and Ruby, learning how to write web applications and APIs. Although I was able to write software at the application level I had no understanding of how software _actually works_.
 
 How does the text in my editor end up being executed on the CPU? What are all these low level concepts like stack, heap, registers, CPU caches, etc? What are finite state machines good for?
 
